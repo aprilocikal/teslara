@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $connection = 'mongodb';
     protected $fillable = ['name', 'description', 'price', 'image_url', 'category'];
 }
