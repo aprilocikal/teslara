@@ -29,7 +29,10 @@
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "CACHE_STORE_DEFAULT": "array",
+        "CACHE_DRIVER": "array",
         "SESSION_DRIVER": "cookie",
-        "LOG_CHANNEL": "stderr"
+        "LOG_CHANNEL": "stderr",
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": ":memory:"
     }
 }
