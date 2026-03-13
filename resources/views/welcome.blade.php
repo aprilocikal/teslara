@@ -262,11 +262,11 @@
                 <!-- Background Big Text -->
                 <h2 id="exp-text-bg" class="absolute text-[20vw] font-black text-stone-200/40 whitespace-nowrap select-none">CRAFTED WITH PRECISION</h2>
                 
-                <!-- Center Cookie Sequence (Stacked) -->
-                <div class="relative z-20 w-[60vw] md:w-[35vw] aspect-square flex items-center justify-center">
-                    <img id="cookie-1" src="/images/cookies1.png" class="absolute w-[120%] h-[120%] object-contain drop-shadow-[0_20px_50px_rgba(74,55,40,0.3)]" alt="Chocolate Chunk">
-                    <img id="cookie-2" src="/images/cookies2.png" class="absolute w-[120%] h-[120%] object-contain drop-shadow-[0_20px_50px_rgba(50,80,50,0.3)] opacity-0 scale-90" alt="Zen Matcha">
-                    <img id="cookie-3" src="/images/cookies3.png" class="absolute w-[120%] h-[120%] object-contain drop-shadow-[0_20px_50px_rgba(150,30,30,0.3)] opacity-0 scale-90" alt="Red Velvet">
+                <!-- Center Cookie Sequence (ONE TRANSFORMING OBJECT) -->
+                <div class="relative z-20 w-[65vw] md:w-[40vw] aspect-square flex items-center justify-center">
+                    <img id="cookie-1" src="/images/cookies1.png" class="absolute w-full h-full object-contain mix-blend-multiply drop-shadow-[0_20px_50px_rgba(74,55,40,0.2)]" alt="Chocolate Chunk">
+                    <img id="cookie-2" src="/images/cookies2.png" class="absolute w-full h-full object-contain mix-blend-multiply opacity-0 scale-95" alt="Zen Matcha">
+                    <img id="cookie-3" src="/images/cookies3.png" class="absolute w-full h-full object-contain mix-blend-multiply opacity-0 scale-95" alt="Red Velvet">
                 </div>
 
                 <!-- Flying Ingredients (Minimalist SVG Icons) -->
@@ -543,49 +543,43 @@
             }
         });
 
-        // Step 1: Subtle Parallax & Rotating Cookie Sequence
-        expTl.fromTo("#exp-text-bg", { x: "10%", opacity: 0.1 }, { x: "-30%", opacity: 0.3, ease: "none" }, 0);
+        // Step 1: Initial State & First Flavor
+        expTl.fromTo("#exp-text-bg", { x: "20%", opacity: 0.1 }, { x: "-20%", opacity: 0.2, ease: "none" }, 0);
         
-        // Cookie 1 Entrance (Chocolate)
+        // Cookie 1 (Base/Chocolate)
         expTl.fromTo("#cookie-1", 
-            { scale: 0.9, rotate: -5, y: 50 }, 
-            { scale: 1.1, rotate: 10, y: 0, duration: 1, ease: "power2.out" }, 
+            { scale: 0.8, rotate: -15, y: 100 }, 
+            { scale: 1, rotate: 0, y: 0, duration: 1, ease: "power3.out" }, 
             0
         );
-        expTl.to("#experience", { backgroundColor: "#fdf8f4", duration: 1 }, 0);
-        expTl.to("#label-1", { opacity: 1, x: 40, duration: 0.8 }, 0.2);
-        
-        // Step 2: Transition to Cookie 2 (Matcha)
-        expTl.to("#cookie-1", { opacity: 0, scale: 1.3, rotate: 20, duration: 0.8 }, 1.2);
-        expTl.to("#label-1", { opacity: 0, x: -40, duration: 0.6 }, 1.2);
-        
-        expTl.to("#cookie-2", { opacity: 1, scale: 1.1, rotate: -15, duration: 0.8 }, 1.3);
-        expTl.to("#experience", { backgroundColor: "#f4fdf4", duration: 1 }, 1.2);
-        expTl.to("#label-2", { opacity: 1, x: -40, duration: 0.8 }, 1.5);
-        
-        // Step 3: Transition to Cookie 3 (Red Velvet)
-        expTl.to("#cookie-2", { opacity: 0, scale: 0.8, rotate: -20, duration: 0.8 }, 2.5);
-        expTl.to("#label-2", { opacity: 0, x: 40, duration: 0.6 }, 2.5);
-        
-        expTl.to("#cookie-3", { opacity: 1, scale: 1.2, rotate: 10, duration: 0.8 }, 2.6);
-        expTl.to("#experience", { backgroundColor: "#fdf4f4", duration: 1 }, 2.5);
-        expTl.to("#label-3", { opacity: 1, x: 40, duration: 0.8 }, 2.8);
+        expTl.to("#label-1", { opacity: 1, x: 20, duration: 0.8 }, 0.5);
+        expTl.to("#ing-1", { opacity: 1, scale: 1, y: -50, rotate: 15, duration: 1 }, 0.5);
 
-        // Movement for labels and ingredients
-        expTl.to("#ing-1", { opacity: 1, scale: 1, y: -80, rotate: 45, blur: 0, duration: 1, ease: "back.out(2)" }, 0.3);
-        expTl.to("#ing-1", { opacity: 0, scale: 0.5, y: -150, duration: 0.8 }, 1.2);
-
-        expTl.to("#ing-2", { opacity: 1, scale: 2, y: 50, rotate: -45, blur: 0, duration: 1.2 }, 1.8);
-        expTl.to("#ing-3", { opacity: 1, x: 100, duration: 1.5, ease: "none" }, 1.5);
-
-        // Step 4: Cinematic Reveal
-        expTl.to("#label-3", { opacity: 0, y: -20, duration: 0.4 }, 3.8);
-        expTl.to("#cookie-3", { scale: 0.7, opacity: 0.1, filter: "blur(15px)", duration: 1, ease: "power2.out" }, 3.8);
-        expTl.to("#ing-2, #ing-3", { opacity: 0, scale: 3, duration: 0.5 }, 3.8);
-        expTl.to("#exp-text-bg", { opacity: 0, duration: 0.5 }, 3.8);
-        expTl.to("#experience", { backgroundColor: "#fcfaf8", duration: 1 }, 3.8);
+        // Step 2: Transform to Matcha
+        expTl.to("#cookie-1", { opacity: 0, scale: 1.1, rotate: 30, duration: 0.6 }, 1.5);
+        expTl.to("#label-1", { opacity: 0, x: -20, duration: 0.4 }, 1.5);
         
-        expTl.to("#exp-final", { opacity: 1, scale: 1, duration: 1, ease: "back.out(1.2)" }, 4.1);
+        expTl.to("#cookie-2", { opacity: 1, scale: 1, rotate: 0, duration: 0.6 }, 1.6);
+        expTl.to("#experience", { backgroundColor: "#f4fdf4", duration: 1 }, 1.5);
+        expTl.to("#label-2", { opacity: 1, x: -20, duration: 0.8 }, 1.8);
+        expTl.to("#ing-2", { opacity: 1, scale: 1.5, rotate: -15, duration: 1 }, 1.8);
+
+        // Step 3: Transform to Red Velvet
+        expTl.to("#cookie-2", { opacity: 0, scale: 0.9, rotate: -30, duration: 0.6 }, 3);
+        expTl.to("#label-2", { opacity: 0, x: 20, duration: 0.4 }, 3);
+        
+        expTl.to("#cookie-3", { opacity: 1, scale: 1.1, rotate: 0, duration: 0.6 }, 3.1);
+        expTl.to("#experience", { backgroundColor: "#fdf4f4", duration: 1 }, 3);
+        expTl.to("#label-3", { opacity: 1, x: 20, duration: 0.8 }, 3.3);
+        expTl.to("#ing-3", { opacity: 1, x: 50, rotate: 5, duration: 1.5 }, 3.3);
+
+        // Step 4: Final Explosion/reveal
+        expTl.to("#label-3", { opacity: 0, scale: 0.8, duration: 0.4 }, 4.5);
+        expTl.to("#cookie-3", { scale: 1.5, opacity: 0, filter: "blur(20px)", duration: 1 }, 4.5);
+        expTl.to("#experience", { backgroundColor: "#fcfaf8", duration: 1 }, 4.5);
+        expTl.to(".absolute:not(#exp-final)", { opacity: 0, duration: 0.5 }, 4.5);
+        
+        expTl.to("#exp-final", { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "back.out(1.7)" }, 4.8);
 
         // Scroll Progress Function
         function updateScrollProgress() {
