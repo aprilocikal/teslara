@@ -9,7 +9,7 @@
         }
     },
     "installCommand": "npm install",
-    "buildCommand": "rm -f bootstrap/cache/*.php && npm run build",
+    "buildCommand": "npm run build",
     "outputDirectory": "public",
     "routes": [
         {
@@ -27,7 +27,13 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "true",
+        "APP_DEBUG": "false",
+        "APP_CONFIG_CACHE": "/tmp/storage/bootstrap/config.php",
+        "APP_ROUTES_CACHE": "/tmp/storage/bootstrap/routes.php",
+        "APP_EVENTS_CACHE": "/tmp/storage/bootstrap/events.php",
+        "APP_PACKAGES_CACHE": "/tmp/storage/bootstrap/packages.php",
+        "APP_SERVICES_CACHE": "/tmp/storage/bootstrap/services.php",
+        "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
         "CACHE_STORE": "array",
         "SESSION_DRIVER": "cookie",
         "LOG_CHANNEL": "stderr",

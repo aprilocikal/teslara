@@ -9,14 +9,14 @@ try {
     require __DIR__ . '/../vendor/autoload.php';
     $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    // Force register core providers that might be missing due to cache/environment issues
-    $app->register(\Illuminate\Filesystem\FilesystemServiceProvider::class);
-    $app->register(\Illuminate\View\ViewServiceProvider::class);
-
+    // Prepare writable storage
     $storagePath = '/tmp/storage';
-    foreach (['/tmp/storage/framework/views', '/tmp/storage/framework/cache', '/tmp/storage/framework/sessions', '/tmp/storage/logs'] as $dir) {
-        if (!is_dir($dir)) mkdir($dir, 0777, true);
-    }
+    @mkdir($storagePath . '/bootstrap', 0777, true);
+    @mkdir($storagePath . '/framework/views', 0777, true);
+    @mkdir($storagePath . '/framework/cache', 0777, true);
+    @mkdir($storagePath . '/framework/sessions', 0777, true);
+    @mkdir($storagePath . '/logs', 0777, true);
+
     $app->useStoragePath($storagePath);
 
     $app->handleRequest(Illuminate\Http\Request::capture());
