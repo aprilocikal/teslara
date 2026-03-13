@@ -29,11 +29,12 @@ try {
     $app->useStoragePath($storagePath);
 
     // Auto-migrate in-memory database
-    if (config('database.default') === 'sqlite' && config('database.connections.sqlite.database') === ':memory:') {
-       $app->booted(function() {
-           \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-       });
-    }
+    $app->booted(function($app) {
+        if ($app['config']->get('database.default') === 'sqlite' && 
+            $app['config']->get('database.connections.sqlite.database') === ':memory:') {
+            $app->make(\Illuminate\Contracts\Console\Kernel::class)->call('migrate', ['--force' => true]);
+        }
+    });
 
     // Handle the request
     $request = \Illuminate\Http\Request::capture();
