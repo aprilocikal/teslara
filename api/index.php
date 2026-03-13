@@ -1,6 +1,6 @@
 <?php
 
-// Reverted to a simpler bridge to avoid early boot errors
+// Cache bust: 2026-03-13 18:45
 require __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
