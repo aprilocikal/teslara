@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 
 // Storefront
+Route::get('/debug-ping', function() {
+    return 'Laravel is alive! PHP Version: ' . phpversion();
+});
 Route::get('/', [ProductController::class, 'index'])->name('home');
 
 // Admin Panel
