@@ -9,7 +9,7 @@
         }
     },
     "installCommand": "npm install",
-    "buildCommand": "npm run build",
+    "buildCommand": "rm -f bootstrap/cache/*.php && npm run build",
     "outputDirectory": "public",
     "routes": [
         {
