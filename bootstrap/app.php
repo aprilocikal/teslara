@@ -13,28 +13,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })
-    ->registered(function ($app) {
-        if (isset($_SERVER['VERCEL_URL'])) {
-            $storagePath = '/tmp/storage';
-            if (!is_dir("$storagePath/framework/views")) {
-                mkdir("$storagePath/framework/views", 0777, true);
-                mkdir("$storagePath/framework/cache", 0777, true);
-                mkdir("$storagePath/framework/sessions", 0777, true);
-                mkdir("$storagePath/logs", 0777, true);
-            }
-            $app->useStoragePath($storagePath);
-        }
-    })
-    ->booted(function ($app) {
-        if (config('database.default') === 'sqlite' && config('database.connections.sqlite.database') === ':memory:') {
-            try {
-                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-            } catch (\Exception $e) {
-                // Ignore
-            }
-        }
-    })
-    ->create();
+    })->create();
