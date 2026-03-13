@@ -9,14 +9,12 @@ class ProductController extends Controller
 {
     public function index()
     {
+        /*
         // Auto-migrate for demo if using sqlite memory on Vercel
         if (config('database.default') === 'sqlite' && config('database.connections.sqlite.database') === ':memory:') {
             try {
                 \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-            } catch (\Exception $e) {
-                // Potential issue with Artisan facade if not fully booted, 
-                // but by now it should be fine.
-            }
+            } catch (\Exception $e) {}
         }
 
         // Seed if empty for demo
@@ -44,15 +42,10 @@ class ProductController extends Controller
                 'category' => 'Signature'
             ]);
         }
-    } catch (\Exception $e) {
-        // Silently skip seeding if it fails
-    }
+    } catch (\Exception $e) {}
+    */
 
-        try {
-            $products = Product::all();
-        } catch (\Exception $e) {
-            $products = collect();
-        }
+        $products = collect();
         return view('welcome', compact('products'));
     }
 }
