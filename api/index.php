@@ -1,28 +1,21 @@
 <?php
 
+// Force Load indispensable providers for Vercel
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 try {
-    $autoload = __DIR__ . '/../vendor/autoload.php';
-    if (!file_exists($autoload)) {
-        die("Autoload file not found at $autoload. Documentation says Vercel should run composer install automatically.");
-    }
-    require $autoload;
+    require __DIR__ . '/../vendor/autoload.php';
+    $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-    $app_php = __DIR__ . '/../bootstrap/app.php';
-    if (!file_exists($app_php)) {
-        die("bootstrap/app.php not found at $app_php");
-    }
-    $app = require_once $app_php;
+    // Force register core providers that might be missing due to cache/environment issues
+    $app->register(\Illuminate\Filesystem\FilesystemServiceProvider::class);
+    $app->register(\Illuminate\View\ViewServiceProvider::class);
 
     $storagePath = '/tmp/storage';
-    if (!is_dir("$storagePath/framework/views")) {
-        mkdir("$storagePath/framework/views", 0777, true);
-        mkdir("$storagePath/framework/cache", 0777, true);
-        mkdir("$storagePath/framework/sessions", 0777, true);
-        mkdir("$storagePath/logs", 0777, true);
+    foreach (['/tmp/storage/framework/views', '/tmp/storage/framework/cache', '/tmp/storage/framework/sessions', '/tmp/storage/logs'] as $dir) {
+        if (!is_dir($dir)) mkdir($dir, 0777, true);
     }
     $app->useStoragePath($storagePath);
 
